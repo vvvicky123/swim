@@ -39,11 +39,13 @@ tabm, tabw = st.tabs(["男子游泳世界冠军TOP60", "女子游泳世界冠军
 with tabm:
     st.subheader("男子游泳单项世界冠军TOP60")
     swim_men.drop("Rank", axis=1, inplace=True)
+    swim_men.drop("夺冠周期", axis=1, inplace=True)
     st.dataframe(swim_men)
 
 with tabw:
     st.subheader("女子游泳单项世界冠军TOP60")
     swim_women.drop("Rank", axis=1, inplace=True)
+    swim_women.drop("夺冠周期", axis=1, inplace=True)
     st.dataframe(swim_women)
 
 men_mean_age, men_std_age = calculate_normal_dist_params(swim_men['夺冠期'])
