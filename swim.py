@@ -37,7 +37,7 @@ tabm, tabw = st.tabs(["男子游泳世界冠军TOP60", "女子游泳世界冠军
 with tabm:
     st.subheader("男子游泳单项世界冠军TOP60")
     swim_men.insert(0, 'Index', range(1, len(swim_men) + 1))
-    st.dataframe(swim_men])
+    st.dataframe(swim_men)
 
 with tabw:
     st.subheader("女子游泳单项世界冠军TOP60")
