@@ -30,27 +30,39 @@ def create_normal_dist_curve(data, mean, std):
     fig.update_layout(title='Normal Distribution Curve')
     return fig
 
-# 绘制组合图
-def create_combined_plot(histogram, normal_dist_curve):
-    combined_fig = go.Figure()
-    for data in histogram.data + normal_dist_curve.data:
-        combined_fig.add_trace(data)
-    combined_fig.update_layout(title_text="Histogram and Normal Distribution Curve")
-    return combined_fig
-
 # Streamlit 应用
-st.title('First Championship Age Analysis')
+st.title('游泳运动员TOP60')
+
+tabm, tabw = st.tabs(["男子游泳世界冠军TOP60", "男子游泳世界冠军TOP60"])
+with tabm:
+    st.subtitle("男子游泳单项世界冠军TOP60")
+    st.dataframe(swim_men[["名字", '国家','出生年份','世界冠军','奥运会','世锦赛','夺冠周期']])
+
+with tabw:
+    st.subtitle("女子游泳单项世界冠军TOP60")
+    st.dataframe(swim_women[["Name", '国家','出生年份','世界冠军','奥运会','世锦赛','夺冠周期']])
 
 mean_age, std_age = calculate_normal_dist_params(swim_men['首冠年龄'])
 histogram_men = create_histogram(swim_men['首冠年龄'], '男子游泳运动员首次世界冠军年纪')
 normal_dist_curve_men = create_normal_dist_curve(swim_men['首冠年龄'], mean_age, std_age)
 
-# 显示图表
-st.plotly_chart(create_combined_plot(histogram_men, normal_dist_curve_men))
-
 mean_age, std_age = calculate_normal_dist_params(swim_women['首冠年龄'])
 histogram_women = create_histogram(swim_women['首冠年龄'], '男子游泳运动员首次世界冠军年纪')
 normal_dist_curve_women = create_normal_dist_curve(swim_women['首冠年龄'], mean_age, std_age)
+
+tab1, tab2, tab3 = st.tabs(["Histogram", "Normal Distribution", "Combined Plot"])
+
+# 在第一个标签页中显示直方图
+with tab1:
+    st.plotly_chart(create_histogram(swim_data['首冠年龄'], 'First Championship Age'))
+
+# 在第二个标签页中显示正态分布曲线
+with tab2:
+    st.plotly_chart(create_normal_dist_curve(swim_data['首冠年龄'], mean_age, std_age))
+
+# 在第三个标签页中显示组合图
+with tab3:
+    st.plotly_chart(create_combined_plot(create_histogram(swim_data['首冠年龄'], 'First Championship Age'), create_normal_dist_curve(swim_data['首冠年龄'], mean_age, std_age)))
 
 # 显示图表
 st.plotly_chart(create_combined_plot(histogram_women, normal_dist_curve_men))
