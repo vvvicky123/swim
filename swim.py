@@ -36,12 +36,12 @@ st.title('游泳运动员TOP60')
 tabm, tabw = st.tabs(["男子游泳世界冠军TOP60", "男子游泳世界冠军TOP60"])
 with tabm:
     st.subheader("男子游泳单项世界冠军TOP60")
-    swim_men.insert(0, 'Index', range(1, len(df) + 1))
+    swim_men.insert(0, 'Index', range(1, len(swim_men) + 1))
     st.dataframe(swim_men[["名字", '国家','出生年份','世界冠军','奥运会','世锦赛','夺冠周期']])
 
 with tabw:
     st.subheader("女子游泳单项世界冠军TOP60")
-    swim_women.insert(0, 'Index', range(1, len(df) + 1))
+    swim_women.insert(0, 'Index', range(1, len(swim_women) + 1))
     st.dataframe(swim_women[["名字", '国家','出生年份','世界冠军','奥运会','世锦赛','夺冠周期']])
 
 mean_age, std_age = calculate_normal_dist_params(swim_men['首冠年龄'])
