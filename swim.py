@@ -33,16 +33,16 @@ def create_normal_dist_curve(data, mean, std):
 # Streamlit 应用
 st.title('游泳运动员TOP60')
 
-tabm, tabw = st.tabs(["男子游泳世界冠军TOP60", "男子游泳世界冠军TOP60"])
+tabm, tabw = st.tabs(["男子游泳世界冠军TOP60", "女子游泳世界冠军TOP60"])
 with tabm:
     st.subheader("男子游泳单项世界冠军TOP60")
     swim_men.insert(0, 'Index', range(1, len(swim_men) + 1))
-    st.dataframe(swim_men[["名字", '国家','出生年份','世界冠军','奥运会','世锦赛','夺冠周期']])
+    st.dataframe(swim_men])
 
 with tabw:
     st.subheader("女子游泳单项世界冠军TOP60")
     swim_women.insert(0, 'Index', range(1, len(swim_women) + 1))
-    st.dataframe(swim_women[["名字", '国家','出生年份','世界冠军','奥运会','世锦赛','夺冠周期']])
+    st.dataframe(swim_women)
 
 men_mean_age, men_std_age = calculate_normal_dist_params(swim_men['夺冠期'])
 histogram_men = create_histogram(swim_men['首冠年龄'], '男子首冠年龄分布图')
@@ -59,9 +59,7 @@ tabm1, tabw1 = st.tabs(["男子夺冠周期", "女子夺冠周期"])
 with tabm1:
     st.plotly_chart(histogram_men)
     st.plotly_chart(normal_dist_curve_men)
-    st.dataframe(swim_men[["名字", '国家','世界冠军','出生年份','首冠年龄','首冠年份','末冠年份','夺冠期']])
 
 with tabw1:
     st.plotly_chart(histogram_women)
     st.plotly_chart(normal_dist_curve_women)
-    st.dataframe(swim_women[["名字", '国家','世界冠军','出生年份','首冠年龄','首冠年份','末冠年份','夺冠期']])
