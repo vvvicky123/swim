@@ -55,7 +55,7 @@ normal_dist_curve_women = create_normal_dist_curve(swim_women['首冠年龄'], m
 col1, col2 = st.columns(2)
 
 with col1:
-    st.subheader("男子游泳运动员夺冠周期"）
+    st.subheader("男子游泳运动员夺冠周期")
     tabm1, tabm2, tabm3 = st.tabs(["首冠年龄分布柱状图", "夺冠周期分布","男子TOP60夺冠周期表"])
     
     # 在第一个标签页中显示直方图
