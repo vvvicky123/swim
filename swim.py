@@ -7,8 +7,8 @@ import seaborn as sns
 
 
 # 读取数据
-swim_men = pd.read_excel('D:\\芯通智造\\swim.xlsx', sheet_name='Sheet1')
-swim_women = pd.read_excel('D:\\芯通智造\\swim.xlsx', sheet_name='Sheet2')
+swim_men = pd.read_excel('swim.xlsx', sheet_name='Sheet1')
+swim_women = pd.read_excel('swim.xlsx', sheet_name='Sheet2')
 
 # 计算正态分布参数
 def calculate_normal_dist_params(data):
