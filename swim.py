@@ -36,38 +36,39 @@ st.title('游泳运动员TOP60')
 tabm, tabw = st.tabs(["男子游泳世界冠军TOP60", "男子游泳世界冠军TOP60"])
 with tabm:
     st.subheader("男子游泳单项世界冠军TOP60")
+    swim_men.insert(0, 'Index', range(1, len(df) + 1))
     st.dataframe(swim_men[["名字", '国家','出生年份','世界冠军','奥运会','世锦赛','夺冠周期']])
 
 with tabw:
     st.subheader("女子游泳单项世界冠军TOP60")
-    st.dataframe(swim_women[["Name", '国家','出生年份','世界冠军','奥运会','世锦赛','夺冠周期']])
+    swim_women.insert(0, 'Index', range(1, len(df) + 1))
+    st.dataframe(swim_women[["名字", '国家','出生年份','世界冠军','奥运会','世锦赛','夺冠周期']])
 
 mean_age, std_age = calculate_normal_dist_params(swim_men['首冠年龄'])
 histogram_men = create_histogram(swim_men['首冠年龄'], '男子游泳运动员首次世界冠军年纪')
 normal_dist_curve_men = create_normal_dist_curve(swim_men['首冠年龄'], mean_age, std_age)
 
 mean_age, std_age = calculate_normal_dist_params(swim_women['首冠年龄'])
-histogram_women = create_histogram(swim_women['首冠年龄'], '男子游泳运动员首次世界冠军年纪')
+histogram_women = create_histogram(swim_women['首冠年龄'], '女子游泳运动员首次世界冠军年纪')
 normal_dist_curve_women = create_normal_dist_curve(swim_women['首冠年龄'], mean_age, std_age)
 
-tab1, tab2, tab3 = st.tabs(["Histogram", "Normal Distribution", "Combined Plot"])
+col1, col2 = st.columns(2)
 
-# 在第一个标签页中显示直方图
-with tab1:
-    st.plotly_chart(create_histogram(swim_data['首冠年龄'], 'First Championship Age'))
-
-# 在第二个标签页中显示正态分布曲线
-with tab2:
-    st.plotly_chart(create_normal_dist_curve(swim_data['首冠年龄'], mean_age, std_age))
-
-# 在第三个标签页中显示组合图
-with tab3:
-    st.plotly_chart(create_combined_plot(create_histogram(swim_data['首冠年龄'], 'First Championship Age'), create_normal_dist_curve(swim_data['首冠年龄'], mean_age, std_age)))
-
-# 显示图表
-st.plotly_chart(create_combined_plot(histogram_women, normal_dist_curve_men))
-
-
+with col1:
+    st.subheader("男子游泳运动员夺冠周期"）
+    tabm1, tabm2, tabm3 = st.tabs(["首冠年龄分布柱状图", "夺冠周期分布","男子TOP60夺冠周期表"])
+    
+    # 在第一个标签页中显示直方图
+    with tabm1:
+        st.plotly_chart(create_histogram(swim_data['首冠年龄'], '男子游泳世界冠军首冠年龄'))
+    
+    # 在第二个标签页中显示正态分布曲线
+    with tabm2:
+        st.plotly_chart(create_normal_dist_curve(swim_data['夺冠期'], mean_age, std_age))
+    
+    # 在第三个标签页中显示组合图
+    with tabm3:
+        st.dataframe(swim_men[["名字", '国家','出生年份','首冠年龄','首冠年份','末冠年份','夺冠期']])
 
 
 st.plotly_chart(histogram_women)
