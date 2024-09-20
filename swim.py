@@ -27,7 +27,7 @@ def create_normal_dist_curve(data, mean, std):
     x = np.linspace(min(data), max(data), 100)
     y = (1 / (std * np.sqrt(2 * np.pi))) * np.exp(-0.5 * ((x - mean) / std) ** 2)
     fig = go.Figure(data=[go.Scatter(x=x, y=y, mode='lines', name='Normal Dist Curve')])
-    fig.update_layout(title='夺冠期正态分布图')
+    fig.update_layout(title='夺冠周期正态分布图')
     return fig
 
 # Streamlit 应用
@@ -45,15 +45,15 @@ with tabw:
     st.dataframe(swim_women[["名字", '国家','出生年份','世界冠军','奥运会','世锦赛','夺冠周期']])
 
 men_mean_age, men_std_age = calculate_normal_dist_params(swim_men['夺冠期'])
-histogram_men = create_histogram(swim_men['首冠年龄'], '男子游泳世界冠军首冠年龄分布')
+histogram_men = create_histogram(swim_men['首冠年龄'], '男子首冠年龄分布图')
 normal_dist_curve_men = create_normal_dist_curve(swim_men['夺冠期'], men_mean_age, men_std_age)
 
 mean_age, std_age = calculate_normal_dist_params(swim_women['夺冠期'])
-histogram_women = create_histogram(swim_women['首冠年龄'], '女子游泳运动员首次世界冠军年纪')
+histogram_women = create_histogram(swim_women['首冠年龄'], '男子首冠年龄分布图')
 normal_dist_curve_women = create_normal_dist_curve(swim_women['夺冠期'], mean_age, std_age)
 
 st.subheader("男子游泳运动员夺冠周期")
-tabm1, tabw1 = st.tabs(["首冠年龄分布柱状图", "夺冠周期分布","男子TOP60夺冠周期表"])
+tabm1, tabw1 = st.tabs(["男子夺冠周期", "女子夺冠周期"])
 
 # 在第一个标签页中显示直方图
 with tabm1:
