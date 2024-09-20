@@ -20,6 +20,8 @@ def calculate_normal_dist_params(data):
 def create_histogram(data, name):
     fig = px.histogram(data, x=data, nbins=30, title=f'{name}')
     fig.update_layout(bargap=0.3, bargroupgap=0.2)
+    fig.update_xaxes(title_text='首冠年龄')
+    fig.update_yaxes(title_text='数量')
     return fig
 
 # 计算正态分布曲线
